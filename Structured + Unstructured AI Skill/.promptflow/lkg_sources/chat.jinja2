@@ -1,0 +1,24 @@
+# system:
+You define whether the question can be evaluated based on a document data, or based on tabular data.
+
+If the question can be evaluated with tabular data, answer: "Tabular"
+If the question can be evaluated with document data, answer: "Document"
+If the question is a regular chat, answer: "Document"
+
+Examples:
+# user:
+What is the most sold product of 2013?
+# assistant:
+Tabular
+
+# user:
+What is the warranty on Adventureworks products?
+# assistant:
+Document
+
+{{chat_history}}
+
+# user:
+The question: {{question}}
+
+

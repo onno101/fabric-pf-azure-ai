@@ -1,0 +1,138 @@
+{
+  "nodes": {
+    "classify_question": {
+      "variant_0": {
+        "inputs": {},
+        "inputsValue": {}
+      }
+    },
+    "invoke_aiskill": {
+      "variant_0": {
+        "inputs": {},
+        "inputsValue": {}
+      }
+    },
+    "lookup_rag": {
+      "variant_0": {
+        "inputs": {
+          "index_type": [
+            {
+              "value": "Azure AI Search"
+            }
+          ],
+          "acs_content_field": [
+            {
+              "display_value": "content",
+              "value": "content"
+            }
+          ],
+          "acs_embedding_field": [],
+          "acs_index_name": [
+            {
+              "display_value": "onelake-index",
+              "value": "onelake-index"
+            }
+          ],
+          "acs_metadata_field": [
+            {
+              "display_value": "metadata_content_type",
+              "value": "metadata_content_type"
+            }
+          ],
+          "cosmosdb_nosql_connection": [],
+          "cosmosdb_nosql_container_name": [],
+          "cosmosdb_nosql_content_field": [],
+          "cosmosdb_nosql_database_name": [],
+          "cosmosdb_nosql_embedding_field": [],
+          "embedding_type": [
+            {
+              "displayValue": "Azure OpenAI",
+              "value": "Azure OpenAI"
+            }
+          ],
+          "embedding_deployment": [
+            {
+              "display_value": "text-embedding-ada-002",
+              "value": "text-embedding-ada-002"
+            }
+          ],
+          "embedding_model": [],
+          "serverless_embedding_connection": [],
+          "es_content_field": [],
+          "es_embedding_field": [],
+          "es_index_connection": [],
+          "es_index_name": [],
+          "es_metadata_field": [],
+          "mlindex_asset_id": [],
+          "mongodb_collection": [],
+          "mongodb_connection": [],
+          "mongodb_content_field": [],
+          "mongodb_database": [],
+          "mongodb_embedding_field": [],
+          "mongodb_index_name": [],
+          "pinecone_index_connection": [],
+          "pinecone_index_name": [],
+          "postgres_connection": [],
+          "postgres_content_field": [],
+          "postgres_embedding_field": [],
+          "postgres_search_type": [],
+          "postgres_table_name": [],
+          "qdrant_embedding_field": [],
+          "qdrant_index_connection": [],
+          "qdrant_index_name": [],
+          "semantic_configuration": [],
+          "weaviate_collection": [],
+          "weaviate_connection": [],
+          "weaviate_content_field": [],
+          "weaviate_embedding_field": [],
+          "query_type": [
+            {
+              "display_value": "Keyword",
+              "value": "Keyword"
+            }
+          ]
+        },
+        "inputsValue": {
+          "index_type": "Azure AI Search",
+          "acs_index_connection": "aisearchcontossovdhorst",
+          "acs_content_field": "content",
+          "acs_index_name": "onelake-index",
+          "acs_metadata_field": "metadata_content_type",
+          "embedding_type": "Azure OpenAI",
+          "aoai_embedding_connection": "aaiscontonnovd8139891296_aoai",
+          "embedding_deployment": "text-embedding-ada-002"
+        }
+      }
+    },
+    "generate_response": {
+      "variant_0": {
+        "inputs": {},
+        "inputsValue": {}
+      }
+    },
+    "generate_prompt_context": {
+      "variant_0": {
+        "inputs": {},
+        "inputsValue": {}
+      }
+    },
+    "prompt_rag": {
+      "variant_1": {
+        "inputs": {},
+        "inputsValue": {}
+      }
+    },
+    "answer_rag": {
+      "variant_0": {
+        "inputs": {},
+        "inputsValue": {}
+      }
+    },
+    "final_answer": {
+      "variant_0": {
+        "inputs": {},
+        "inputsValue": {}
+      }
+    }
+  }
+}

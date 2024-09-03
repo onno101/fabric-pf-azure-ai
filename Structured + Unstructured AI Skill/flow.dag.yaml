@@ -1,0 +1,148 @@
+id: template_chat_flow
+name: Template Chat Flow
+inputs:
+  chat_history:
+    type: list
+    is_chat_input: false
+    is_chat_history: true
+  question:
+    type: string
+    is_chat_input: true
+outputs:
+  answer:
+    type: string
+    reference: ${final_answer.output}
+    is_chat_output: true
+nodes:
+- name: classify_question
+  type: llm
+  source:
+    type: code
+    path: chat.jinja2
+  inputs:
+    deployment_name: gpt-4o-mini
+    temperature: 0.1
+    top_p: 1
+    max_tokens: 256
+    chat_history: ${inputs.chat_history}
+    question: ${inputs.question}
+  provider: AzureOpenAI
+  connection: aaiscontonnovd8139891296_aoai
+  api: chat
+  module: promptflow.tools.aoai
+  use_variants: false
+- name: invoke_aiskill
+  type: python
+  source:
+    type: code
+    path: invoke_aiskill.py
+  inputs:
+    conn: aiskill-keys
+    input1: ${inputs.question}
+  activate:
+    when: ${classify_question.output}
+    is: Tabular
+  use_variants: false
+- name: lookup_rag
+  type: python
+  source:
+    type: package
+    tool: promptflow_vectordb.tool.common_index_lookup.search
+  inputs:
+    mlindex_content: >
+      embeddings:
+        api_base: https://aaiscontonnovd8139891296.openai.azure.com/
+        api_type: azure
+        api_version: 2023-07-01-preview
+        batch_size: '1'
+        connection:
+          id: /subscriptions/2b1cd093-b012-4b8b-b09b-576cc9feb79a/resourceGroups/rg-aais-contonnovdhorst/providers/Microsoft.MachineLearningServices/workspaces/fabcon-marconno/connections/aaiscontonnovd8139891296_aoai
+        connection_type: workspace_connection
+        deployment: text-embedding-ada-002
+        dimension: 1536
+        kind: open_ai
+        model: text-embedding-ada-002
+        schema_version: '2'
+      index:
+        api_version: 2024-05-01-preview
+        connection:
+          id: /subscriptions/2b1cd093-b012-4b8b-b09b-576cc9feb79a/resourceGroups/rg-aais-contonnovdhorst/providers/Microsoft.MachineLearningServices/workspaces/fabcon-marconno/connections/aisearchcontossovdhorst
+        connection_type: workspace_connection
+        endpoint: https://aisearch-contossovdhorst.search.windows.net/
+        engine: azure-sdk
+        field_mapping:
+          content: content
+          embedding: null
+          metadata: metadata_content_type
+        index: onelake-index
+        kind: acs
+        semantic_configuration_name: null
+    queries: ${inputs.question}
+    query_type: Keyword
+    top_k: 3
+  activate:
+    when: ${classify_question.output}
+    is: Document
+  use_variants: false
+- name: generate_response
+  type: llm
+  source:
+    type: code
+    path: generate_response.jinja2
+  inputs:
+    deployment_name: gpt-4o-mini
+    temperature: 0.3
+    top_p: 1
+    max_tokens: 200
+    question: ${inputs.question}
+    rag_answer: ${invoke_aiskill.output}
+  provider: AzureOpenAI
+  connection: aaiscontonnovd8139891296_aoai
+  api: chat
+  module: promptflow.tools.aoai
+  use_variants: false
+- name: generate_prompt_context
+  type: python
+  source:
+    type: code
+    path: generate_prompt_context.py
+  inputs:
+    search_result: ${lookup_rag.output}
+  use_variants: false
+- name: prompt_rag
+  type: prompt
+  source:
+    type: code
+    path: prompt_rag__variant_1.jinja2
+  inputs:
+    chat_history: ${inputs.chat_history}
+    chat_input: ${inputs.question}
+    contexts: ${generate_prompt_context.output}
+  use_variants: false
+- name: answer_rag
+  type: llm
+  source:
+    type: code
+    path: answer_rag.jinja2
+  inputs:
+    deployment_name: gpt-4o-mini
+    temperature: 1
+    top_p: 1
+    question: ${prompt_rag.output}
+  provider: AzureOpenAI
+  connection: aaiscontonnovd8139891296_aoai
+  api: chat
+  module: promptflow.tools.aoai
+  use_variants: false
+- name: final_answer
+  type: python
+  source:
+    type: code
+    path: final_answer.py
+  inputs:
+    input_aiskill: ${generate_response.output}
+    input_rag: ${answer_rag.output}
+  use_variants: false
+node_variants: {}
+environment:
+  python_requirements_txt: requirements.txt

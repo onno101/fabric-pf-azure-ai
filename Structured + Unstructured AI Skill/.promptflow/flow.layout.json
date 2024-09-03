@@ -1,0 +1,73 @@
+{
+  "orientation": "Vertical",
+  "nodeLayouts": {
+    "inputs": {
+      "x": 242.5,
+      "y": 62,
+      "index": -1
+    },
+    "outputs": {
+      "x": 242,
+      "y": 832,
+      "index": -1
+    },
+    "classify_question": {
+      "x": 242.5,
+      "y": 172,
+      "height": 75,
+      "index": 0
+    },
+    "invoke_aiskill": {
+      "x": 417.5,
+      "y": 282,
+      "height": 75,
+      "index": 1
+    },
+    "lookup_rag": {
+      "x": 67.5,
+      "y": 282,
+      "height": 75,
+      "index": 2
+    },
+    "generate_response": {
+      "x": 472.5,
+      "y": 392,
+      "height": 75,
+      "index": 3
+    },
+    "generate_prompt_context": {
+      "x": 67.5,
+      "y": 392,
+      "height": 75,
+      "index": 4
+    },
+    "prompt_rag": {
+      "x": 12,
+      "y": 502,
+      "height": 75,
+      "index": 5
+    },
+    "answer_rag": {
+      "x": 96.99999999999989,
+      "y": 610.3333333333334,
+      "height": 75,
+      "index": 6
+    },
+    "final_answer": {
+      "x": 242,
+      "y": 722,
+      "height": 75,
+      "index": 7
+    }
+  },
+  "viewport": {
+    "transformMatrix": [
+      0.47829690000000014,
+      0,
+      0,
+      0.47829690000000014,
+      252.06455299999993,
+      184.06182194999974
+    ]
+  }
+}
