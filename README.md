@@ -2,7 +2,12 @@
 
 
 ## Overview
-This repo is conataining a prompt flow that is able to ground answers based on structured and unstrured data from Fabric. The structured data is queried through a Fabric AI Skills Endpoint. The unstructured data is coming from Azure AI Search. 
+This repo is conataining a prompt flow that is able to ground answers based on structured and unstrured data from Fabric. The structured data is queried through a Fabric AI Skills Endpoint. The unstructured data is coming from Azure AI Search.
+
+The prompt flow is built on the following architecture:
+![archiecture](images/image-1.png)
+
+This architecture describes the above use cases presented at the Fabric Conference in Stockholm during a session called [Building a custom Q&A bot on your Fabric data with AI Studio](https://www.sharepointeurope.com/events/building-a-custom-qa-bot-on-your-fabric-data-with-ai-studio/).
 
 ## Features
 - **Azure AI Integration**: Utilizes Azure AI services for natural language processing and understanding.
@@ -48,7 +53,7 @@ This repo is conataining a prompt flow that is able to ground answers based on s
 1. Connect AI Skill 
     - In the 'Connections' pane in the AI Studio Hub, create a 'custom connection'
     - Add the following variables to the custom connection
-    ![sceenshot_connection](image.png)
+    ![sceenshot_connection](images/image.png)
 1. Test and debug the AI Skill
     - When ready, deploy it to an endpoint and start interacting from anywhere through the API endpoint
 
