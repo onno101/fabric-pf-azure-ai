@@ -4,7 +4,7 @@
 This repository contains a prompt flow that grounds answers based on structured and unstructured data from Fabric. The structured data is queried through a Fabric AI Skills Endpoint, while the unstructured data comes from Azure AI Search.
 
 The prompt flow is built on the following architecture:
-![architecture](images/image-1.png)
+![architecture](images/Picture1.jpg)
 
 This architecture was presented at the Fabric Conference in Stockholm during a session called [Building a custom Q&A bot on your Fabric data with AI Studio](https://www.sharepointeurope.com/events/building-a-custom-qa-bot-on-your-fabric-data-with-ai-studio/).
 
