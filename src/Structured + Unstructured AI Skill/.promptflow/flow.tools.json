@@ -1766,98 +1766,48 @@
   },
   "code": {
     "chat.jinja2": {
-      "name": "chat.jinja2",
-      "type": "prompt",
+      "type": "llm",
       "inputs": {
-        "chat_history": {
-          "type": [
-            "string"
-          ],
-          "allow_manual_entry": false,
-          "is_multi_select": false,
-          "input_type": "default",
-          "value": "${inputs.chat_history}",
-          "id": "p8wguhf8"
-        },
         "question": {
           "type": [
             "string"
-          ],
-          "allow_manual_entry": false,
-          "is_multi_select": false,
-          "input_type": "default",
-          "value": "${inputs.question}",
-          "id": "zj16ji5f"
+          ]
         }
       },
-      "source": "chat.jinja2",
-      "is_builtin": false,
-      "enable_kwargs": false,
-      "tool_state": "stable",
-      "toolId": "chat.jinja2"
+      "source": "chat.jinja2"
     },
     "generate_response.jinja2": {
-      "name": "generate_response.jinja2",
-      "type": "prompt",
+      "type": "llm",
       "inputs": {
         "question": {
           "type": [
             "string"
-          ],
-          "allow_manual_entry": false,
-          "is_multi_select": false,
-          "input_type": "default",
-          "value": "${inputs.question}",
-          "id": "2cn674fm"
+          ]
         },
-        "rag_answer": {
+        "ai_skill_answer": {
           "type": [
             "string"
-          ],
-          "allow_manual_entry": false,
-          "is_multi_select": false,
-          "input_type": "default",
-          "value": "${invoke_aiskill.output}",
-          "id": "l9xwqdfi"
+          ]
         }
       },
-      "source": "generate_response.jinja2",
-      "is_builtin": false,
-      "enable_kwargs": false,
-      "tool_state": "stable",
-      "toolId": "generate_response.jinja2"
+      "source": "generate_response.jinja2"
     },
     "invoke_aiskill.py": {
-      "name": "invoke_aiskill.py",
       "type": "python",
       "inputs": {
-        "conn": {
-          "type": [
-            "CustomConnection"
-          ],
-          "allow_manual_entry": false,
-          "is_multi_select": false,
-          "input_type": "default",
-          "value": "aiskill-keys",
-          "realType": "CustomConnection"
-        },
         "input1": {
           "type": [
             "string"
-          ],
-          "allow_manual_entry": false,
-          "is_multi_select": false,
-          "input_type": "default",
-          "value": "${inputs.question}",
-          "id": "cqfqpkc7"
+          ]
+        },
+        "conn": {
+          "type": [
+            "CustomConnection"
+          ]
         }
       },
       "source": "invoke_aiskill.py",
-      "function": "my_python_tool",
-      "is_builtin": false,
-      "enable_kwargs": false,
-      "tool_state": "stable",
-      "toolId": "invoke_aiskill.py"
+      "function": "my_python_tool"
     },
     "generate_prompt_context.py": {
       "name": "generate_prompt_context.py",
@@ -1880,95 +1830,53 @@
       "toolId": "generate_prompt_context.py"
     },
     "final_answer.py": {
-      "name": "final_answer.py",
       "type": "python",
       "inputs": {
-        "input_aiskill": {
-          "type": [
-            "string"
-          ],
-          "allow_manual_entry": false,
-          "is_multi_select": false,
-          "input_type": "default",
-          "value": "${generate_response.output}",
-          "id": "ykl0segh"
-        },
         "input_rag": {
           "type": [
             "string"
-          ],
-          "allow_manual_entry": false,
-          "is_multi_select": false,
-          "input_type": "default",
-          "value": "${answer_rag.output}"
+          ]
+        },
+        "input_aiskill": {
+          "type": [
+            "string"
+          ]
         }
       },
       "source": "final_answer.py",
-      "function": "my_python_tool",
-      "is_builtin": false,
-      "enable_kwargs": false,
-      "tool_state": "stable",
-      "toolId": "final_answer.py"
+      "function": "my_python_tool"
     },
     "answer_rag.jinja2": {
-      "name": "answer_rag.jinja2",
-      "type": "prompt",
+      "type": "llm",
       "inputs": {
-        "question": {
+        "prompt_rag": {
           "type": [
             "string"
-          ],
-          "allow_manual_entry": false,
-          "is_multi_select": false,
-          "input_type": "default"
+          ]
         }
       },
-      "source": "answer_rag.jinja2",
-      "is_builtin": false,
-      "enable_kwargs": false,
-      "tool_state": "stable",
-      "toolId": "answer_rag.jinja2"
+      "source": "answer_rag.jinja2"
     },
     "prompt_rag__variant_1.jinja2": {
-      "name": "prompt_rag__variant_1.jinja2",
       "type": "prompt",
       "inputs": {
+        "contexts": {
+          "type": [
+            "string"
+          ]
+        },
         "chat_history": {
           "type": [
             "string"
-          ],
-          "allow_manual_entry": false,
-          "is_multi_select": false,
-          "input_type": "default",
-          "value": "${inputs.chat_history}",
-          "id": "9309atg4"
+          ]
         },
         "chat_input": {
           "type": [
             "string"
-          ],
-          "allow_manual_entry": false,
-          "is_multi_select": false,
-          "input_type": "default",
-          "value": "${inputs.question}",
-          "id": "1j8xsmxv"
-        },
-        "contexts": {
-          "type": [
-            "string"
-          ],
-          "allow_manual_entry": false,
-          "is_multi_select": false,
-          "input_type": "default",
-          "value": "${generate_prompt_context.output}",
-          "id": "dh61v7nz"
+          ]
         }
       },
-      "source": "prompt_rag__variant_1.jinja2",
-      "is_builtin": false,
-      "enable_kwargs": false,
-      "tool_state": "stable",
-      "toolId": "prompt_rag__variant_1.jinja2"
+      "source": "prompt_rag__variant_1.jinja2"
     }
   }
 }

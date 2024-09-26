@@ -15,47 +15,11 @@
     "lookup_rag": {
       "variant_0": {
         "inputs": {
-          "index_type": [
-            {
-              "value": "Azure AI Search"
-            }
-          ],
-          "acs_content_field": [
-            {
-              "display_value": "content",
-              "value": "content"
-            }
-          ],
-          "acs_embedding_field": [],
-          "acs_index_name": [
-            {
-              "display_value": "onelake-index",
-              "value": "onelake-index"
-            }
-          ],
-          "acs_metadata_field": [
-            {
-              "display_value": "metadata_content_type",
-              "value": "metadata_content_type"
-            }
-          ],
           "cosmosdb_nosql_connection": [],
           "cosmosdb_nosql_container_name": [],
           "cosmosdb_nosql_content_field": [],
           "cosmosdb_nosql_database_name": [],
           "cosmosdb_nosql_embedding_field": [],
-          "embedding_type": [
-            {
-              "displayValue": "Azure OpenAI",
-              "value": "Azure OpenAI"
-            }
-          ],
-          "embedding_deployment": [
-            {
-              "display_value": "text-embedding-ada-002",
-              "value": "text-embedding-ada-002"
-            }
-          ],
           "embedding_model": [],
           "serverless_embedding_connection": [],
           "es_content_field": [],
@@ -80,27 +44,28 @@
           "qdrant_embedding_field": [],
           "qdrant_index_connection": [],
           "qdrant_index_name": [],
-          "semantic_configuration": [],
           "weaviate_collection": [],
           "weaviate_connection": [],
           "weaviate_content_field": [],
           "weaviate_embedding_field": [],
           "query_type": [
             {
-              "display_value": "Keyword",
-              "value": "Keyword"
+              "display_value": "Hybrid (vector + keyword)",
+              "value": "Hybrid (vector + keyword)"
             }
           ]
         },
         "inputsValue": {
           "index_type": "Azure AI Search",
           "acs_index_connection": "aisearchcontossovdhorst",
-          "acs_content_field": "content",
-          "acs_index_name": "onelake-index",
-          "acs_metadata_field": "metadata_content_type",
+          "acs_content_field": "chunk",
+          "acs_embedding_field": "text_vector",
+          "acs_index_name": "vector-1725519062137",
+          "acs_metadata_field": "metadata_storage_path",
           "embedding_type": "Azure OpenAI",
           "aoai_embedding_connection": "aaiscontonnovd8139891296_aoai",
-          "embedding_deployment": "text-embedding-ada-002"
+          "embedding_deployment": "text-embedding-ada-002",
+          "semantic_configuration": "vector-1725519062137-semantic-configuration"
         }
       }
     },
@@ -117,7 +82,7 @@
       }
     },
     "prompt_rag": {
-      "variant_1": {
+      "variant_0": {
         "inputs": {},
         "inputsValue": {}
       }

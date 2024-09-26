@@ -10,5 +10,3 @@ def my_python_tool(input_rag: str, input_aiskill: str) -> str:
         return input_rag
     if input_aiskill:
         return input_aiskill
-    else:
-        return "No data can answer this question"

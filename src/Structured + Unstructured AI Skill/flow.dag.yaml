@@ -24,7 +24,6 @@ nodes:
     temperature: 0.1
     top_p: 1
     max_tokens: 256
-    chat_history: ${inputs.chat_history}
     question: ${inputs.question}
   provider: AzureOpenAI
   connection: aaiscontonnovd8139891296_aoai
@@ -71,14 +70,14 @@ nodes:
         endpoint: https://aisearch-contossovdhorst.search.windows.net/
         engine: azure-sdk
         field_mapping:
-          content: content
-          embedding: null
-          metadata: metadata_content_type
-        index: onelake-index
+          content: chunk
+          embedding: text_vector
+          metadata: metadata_storage_path
+        index: vector-1725519062137
         kind: acs
-        semantic_configuration_name: null
+        semantic_configuration_name: vector-1725519062137-semantic-configuration
     queries: ${inputs.question}
-    query_type: Keyword
+    query_type: Hybrid (vector + keyword)
     top_k: 3
   activate:
     when: ${classify_question.output}
@@ -93,9 +92,8 @@ nodes:
     deployment_name: gpt-4o-mini
     temperature: 0.3
     top_p: 1
-    max_tokens: 200
+    ai_skill_answer: ${invoke_aiskill.output}
     question: ${inputs.question}
-    rag_answer: ${invoke_aiskill.output}
   provider: AzureOpenAI
   connection: aaiscontonnovd8139891296_aoai
   api: chat
@@ -128,7 +126,7 @@ nodes:
     deployment_name: gpt-4o-mini
     temperature: 1
     top_p: 1
-    question: ${prompt_rag.output}
+    prompt_rag: ${prompt_rag.output}
   provider: AzureOpenAI
   connection: aaiscontonnovd8139891296_aoai
   api: chat
